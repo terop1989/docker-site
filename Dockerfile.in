@@ -1,6 +1,6 @@
 FROM ubuntu
 
-RUN apk add apache \
+RUN apt-get install apache \
     && echo "Hello from Docker Site!" > /var/www/html/index.html
 
 CMD ["/usr/sbin/apache2ctl", "-DFOREGROUND"]
