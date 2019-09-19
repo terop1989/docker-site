@@ -1,4 +1,4 @@
-FROM alpine
+FROM ubuntu
 
 RUN apk add apache \
     && echo "Hello from Docker Site!" > /var/www/html/index.html
