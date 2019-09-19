@@ -1,10 +1,9 @@
 FROM ubuntu
 
-RUN apt update -y \
-    && apt-get install apache2 \
+RUN apt-get -y update \
+    && apt-get -y install apache2 \
     && echo "Hello from Docker Site!" > /var/www/html/index.html
 
-CMD systemctl enable apache2 \
-    && systemctl start apache2
+CMD ["/usr/sbin/apache2ctl", "-DFOREGROUND"]
 EXPOSE 80
 	
