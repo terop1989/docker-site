@@ -1,0 +1,8 @@
+FROM alpine
+
+RUN apk add apache \
+    && echo "Hello from Docker Site!" > /var/www/html/index.html
+
+CMD ["/usr/sbin/apache2ctl", "-DFOREGROUND"]
+EXPOSE 80
+	
