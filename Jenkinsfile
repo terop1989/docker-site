@@ -13,7 +13,7 @@ pipeline {
 	stages {
 		stage("Preparations") {
 			steps {
-				sh 'echo \'ggg\''
+				sh 'whoami'
 			}
 		}
 	}
