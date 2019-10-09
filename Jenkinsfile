@@ -12,15 +12,7 @@ pipeline {
 		}
 
 	stages {
-	
-		stage("Preparations") 
-			{
-			steps 
-				{
-				sh 'ssh docker@10.0.2.7 \'whoami\''
-				}
-			}		
-		
+					
 		stage("Docker")
 			{
 
@@ -38,6 +30,7 @@ pipeline {
 
 		stage("Delete Container")
 			{
+			steps
 				{
 				sh 'ssh docker@10.0.2.7 \'docker rm -f web01\''
 				}
