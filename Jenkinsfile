@@ -17,7 +17,7 @@ pipeline {
 			{
 			steps 
 				{
-				'ssh docker@10.0.2.7 whoami'
+				sh 'ssh docker@10.0.2.7 \'whoami\''
 				}
 			}		
 		
@@ -25,12 +25,9 @@ pipeline {
 			{
 
 			steps 
+								
 				{
-				'ssh docker@10.0.2.7'
-				}
-				
-				{
-				sh 'docker build -t my_docker_pipe_image .'
+				sh 'ssh docker@10.0.2.7 \'docker build -t my_docker_pipe_image .\''
 				}
 			      
 			}
