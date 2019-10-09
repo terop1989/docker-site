@@ -30,7 +30,7 @@ pipeline {
 				}
 				
 				{
-				'docker build -t my_docker_pipe_image .'
+				sh 'docker build -t my_docker_pipe_image .'
 				}
 			      
 			}
