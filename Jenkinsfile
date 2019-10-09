@@ -21,7 +21,7 @@ pipeline {
 				}
 			}		
 		
-		stage("Docker build")
+		stage("Docker")
 			{
 
 			steps 
@@ -31,10 +31,12 @@ pipeline {
 				}
      
 			
-		
-		
 				{
 				sh 'ssh docker@10.0.2.7 \'docker run --name web01 -d -p 1211:80 my_docker_pipe_image\''
+				}
+
+				{
+				sh 'ssh docker@10.0.2.7 \'docker rm -f web01\''
 				}
 		
 			}
