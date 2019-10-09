@@ -27,7 +27,7 @@ pipeline {
 			steps 
 								
 				{
-				sh 'ssh docker@10.0.2.7 \'docker build -t my_docker_pipe_image github.com/terop1989/docker-site/Dockerfile.in\''
+				sh 'ssh docker@10.0.2.7 \'docker build -t my_docker_pipe_image github.com/terop1989/docker-site\''
 				}
 			      
 			}
