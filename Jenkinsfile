@@ -17,7 +17,7 @@ pipeline {
 			{
 			steps 
 				{
-				sh 'whoami'
+				'ssh docker@10.0.2.7 \'whoami\''
 				}
 			}		
 		
