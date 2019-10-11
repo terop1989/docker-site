@@ -15,7 +15,7 @@ pipeline {
 
 	stages {
 					
-		stage("Docker")
+		stage("Build Container")
 			{
 
 			steps 
