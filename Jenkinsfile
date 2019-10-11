@@ -15,7 +15,7 @@ pipeline {
 
 	stages {
 					
-		stage("Build Container")
+		stage("Build Image")
 			{
 
 			steps 
