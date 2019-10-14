@@ -16,7 +16,7 @@ pipeline {
 	environment
 		{
 		DockerImageName='my_docker_pipe_image'	
-	
+		ContainerName='web01'
 		}
 	
 	stages {
@@ -36,7 +36,7 @@ pipeline {
 			{
 			steps	
 				{
-				sh 'ssh docker@10.0.2.7 \'docker run --name web01 -d -p 1211:80 \' ${DockerImageName}'
+				sh 'ssh docker@10.0.2.7 \'docker run --name \' ${ContainerName} \' -d -p 1211:80 \' ${DockerImageName}'
 				}
 			}
 
