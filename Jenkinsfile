@@ -7,7 +7,7 @@ pipeline {
 		label 'master'
 	      }
 
-	triggers{pollSCM('*/10 * * * *')}
+	triggers{pollSCM('*/5 * * * *')}
 	
 	options {
 		buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
@@ -36,7 +36,7 @@ pipeline {
 			{
 			steps	
 				{
-				sh 'ssh docker@10.0.2.7 \'docker run --name web01 -d -p 1211:80 my_docker_pipe_image\''
+				sh 'ssh docker@10.0.2.7 \'docker run --name web01 -d -p 1211:80 \' ${DockerImageName}'
 				}
 			}
 
