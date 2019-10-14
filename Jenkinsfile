@@ -32,7 +32,7 @@ pipeline {
 			steps 
 								
 				{
-				sh 'ssh ${DockerUserName}@${DockerAddress} \'docker build -t \' ${DockerImageName} \' ${RepositoryServer}/{RepositoryAccount}/{RepositoryProject}\''
+				sh 'ssh ${DockerUserName}@${DockerAddress} \'docker build -t \' ${DockerImageName} \' ${RepositoryServer}/${RepositoryAccount}/${RepositoryProject}'
 				}
      
 			}
@@ -49,7 +49,7 @@ pipeline {
 			{
 			steps
 				{
-				sh 'ssh ${DockerUserName}@${DockerAddress} \'docker rm -f web01\''
+				sh 'ssh ${DockerUserName}@${DockerAddress} \'docker rm -f \' ${ContainerName}'
 				}
 		
 			}
