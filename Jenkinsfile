@@ -27,7 +27,7 @@ pipeline {
 			steps 
 								
 				{
-				sh 'ssh docker@10.0.2.7 \'docker build -t ${DockerImageName} github.com/terop1989/docker-site\''
+				sh 'ssh docker@10.0.2.7 \'docker build -t \' ${DockerImageName} \' github.com/terop1989/docker-site\''
 				}
      
 			}
