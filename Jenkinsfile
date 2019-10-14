@@ -12,7 +12,13 @@ pipeline {
 	options {
 		buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
 		}
-
+	
+	environment
+		{
+		DockerImageName='my_docker_pipe_image'	
+	
+		}
+	
 	stages {
 					
 		stage("Build Image")
@@ -21,7 +27,7 @@ pipeline {
 			steps 
 								
 				{
-				sh 'ssh docker@10.0.2.7 \'docker build -t my_docker_pipe_image github.com/terop1989/docker-site\''
+				sh 'ssh docker@10.0.2.7 \'docker build -t {DockerImageName} github.com/terop1989/docker-site\''
 				}
      
 			}
