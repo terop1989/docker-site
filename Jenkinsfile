@@ -19,6 +19,9 @@ pipeline {
 		ContainerName='web01'
 		DockerAddress='10.0.2.7'
 		DockerUserName='docker'
+		RepositoryServer='github.com'
+		RepositoryAccount='terop1989'
+		RepositoryProject='docker-site'
 		}
 	
 	stages {
@@ -29,7 +32,7 @@ pipeline {
 			steps 
 								
 				{
-				sh 'ssh ${DockerUserName}@${DockerAddress} \'docker build -t \' ${DockerImageName} \' github.com/terop1989/docker-site\''
+				sh 'ssh ${DockerUserName}@${DockerAddress} \'docker build -t \' ${DockerImageName} \' ${RepositoryServer}/{RepositoryAccount}/{RepositoryProject}\''
 				}
      
 			}
