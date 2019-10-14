@@ -17,6 +17,7 @@ pipeline {
 		{
 		DockerImageName='my_docker_pipe_image'	
 		ContainerName='web01'
+		DockerAddress='10.0.2.7'
 		}
 	
 	stages {
@@ -27,7 +28,7 @@ pipeline {
 			steps 
 								
 				{
-				sh 'ssh docker@10.0.2.7 \'docker build -t \' ${DockerImageName} \' github.com/terop1989/docker-site\''
+				sh 'ssh docker@${DockerAddress} \'docker build -t \' ${DockerImageName} \' github.com/terop1989/docker-site\''
 				}
      
 			}
