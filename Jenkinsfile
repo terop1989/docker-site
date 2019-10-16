@@ -23,6 +23,7 @@ pipeline {
 		RepositoryServer='github.com'
 		RepositoryAccount='terop1989'
 		RepositoryProject='docker-site'
+		DockerHubAccount='terop1989'
 		}
 	
 	stages {
@@ -33,13 +34,23 @@ pipeline {
 			steps 
 								
 				{
-				sh 'ssh ${DockerUserName}@${DockerAddress} \'docker build -t \' ${DockerImageName} ${RepositoryServer}/${RepositoryAccount}/${RepositoryProject}'
+				sh 'ssh ${DockerUserName}@${DockerAddress} \'docker build -t \' ${DockerHubAccount}/${DockerImageName} ${RepositoryServer}/${RepositoryAccount}/${RepositoryProject}'
 				}
      
 			}
 	
-		
+		stage("Docker Push")
+			{
+			steps
+				{
+				sh 'ssh ${DockerUserName}@{DockerAddress \'docker push \''
+				
+				}
+			}
 	
+		
+
+			
 		stage("DockerSwarm Service deploy")
 			{
 			steps
