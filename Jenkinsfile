@@ -54,6 +54,22 @@ pipeline {
 				}
 		
 			}
+		
+		stage("DockerSwarm Service deploy")
+			{
+			steps
+				{
+				sh 'ssh ${DockeruserName}@${DockerSwarmMasterNodeAddress} \'docker service create --replicas 2 --name \' ${ContainerName} ${DockerImageName}' 
+				}
+			}
+		
+		stage("DockerSwarm Service remove")
+			{
+			steps
+				{
+				sh 'ssh ${DockerUserName}@${DockerSwarmMasterNodeAddress} \'docker service rm \' ${ContainerName}   '
+				}
+			}
 
 
 		}
