@@ -38,23 +38,8 @@ pipeline {
      
 			}
 	
-		stage("Run Container")
-			{
-			steps	
-				{
-				sh 'ssh ${DockerUserName}@${DockerAddress} \'docker run --name \' ${ContainerName} \' -d -p 1211:80 \' ${DockerImageName}'
-				}
-			}
-
-		stage("Delete Container")
-			{
-			steps
-				{
-				sh 'ssh ${DockerUserName}@${DockerAddress} \'docker rm -f \' ${ContainerName}'
-				}
 		
-			}
-		
+	
 		stage("DockerSwarm Service deploy")
 			{
 			steps
