@@ -19,6 +19,7 @@ pipeline {
 		ContainerName='web01'
 		DockerAddress='10.0.2.7'
 		DockerUserName='docker'
+		DockerSwarmMasterNodeAddress='10.0.2.7'
 		RepositoryServer='github.com'
 		RepositoryAccount='terop1989'
 		RepositoryProject='docker-site'
