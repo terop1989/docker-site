@@ -43,7 +43,7 @@ pipeline {
 			{
 			steps
 				{
-				sh 'ssh ${DockerUserName}@{DockerAddress} \'docker push \''
+				sh 'ssh ${DockerUserName}@${DockerAddress} \'docker push \''
 				
 				}
 			}
