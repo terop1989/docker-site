@@ -42,19 +42,20 @@ pipeline {
 		stage("Docker Push")
 			{
 			steps
-				withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_NAME', passwordVariable: 'DOCKER_PASSWORD')])
 				{
-					}
-					sh 'ssh ${DockerUserName}@{DockerAddress} \'docker login -u \' $DOCKER_USER \' -p \' $DOCKER_PASSWORD'
-					}
-					
+				withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_NAME', passwordVariable: 'DOCKER_PASSWORD')])
 					{
-					sh 'ssh ${DockerUserName}@${DockerAddress} \'docker push \' ${DockerHubAccount}/${DockerImageName}'
+						{
+						sh 'ssh ${DockerUserName}@{DockerAddress} \'docker login -u \' $DOCKER_USER \' -p \' $DOCKER_PASSWORD'
+						}
 					
+						{
+						sh 'ssh ${DockerUserName}@${DockerAddress} \'docker push \' ${DockerHubAccount}/${DockerImageName}'
+					
+						}
 					}
 				}
 			}
-	
 		
 
 			
