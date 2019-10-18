@@ -16,6 +16,7 @@ pipeline {
 	environment
 		{
 		DockerImageName='my_docker_pipe_image'	
+		DockerImageTag='latest'
 		ContainerName='web01'
 		DockerAddress='10.0.2.7'
 		DockerUserName='docker'
@@ -34,7 +35,7 @@ pipeline {
 			steps 
 								
 				{
-				sh 'ssh ${DockerUserName}@${DockerAddress} \'docker build -t \' ${DockerHubAccount}/${DockerImageName} ${RepositoryServer}/${RepositoryAccount}/${RepositoryProject}'
+				sh 'ssh ${DockerUserName}@${DockerAddress} \'docker build -t \' ${DockerHubAccount}/${DockerImageName}:${DockerImageTag} ${RepositoryServer}/${RepositoryAccount}/${RepositoryProject}'
 				}
      
 			}
