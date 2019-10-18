@@ -51,7 +51,7 @@ pipeline {
 						
 					
 						
-						sh 'ssh ${DockerUserName}@${DockerAddress} \'docker push \' ${DockerHubAccount}/${DockerImageName}:${DockerImageTag}'
+						sh 'ssh ${DockerUserName}@${DockerAddress} \'docker push docker.io/\'${DockerHubAccount}/${DockerImageName}:${DockerImageTag}'
 					
 						
 					}
