@@ -63,7 +63,7 @@ pipeline {
 			{
 			steps
 				{
-				sh 'ssh ${DockerUserName}@${DockerSwarmMasterNodeAddress} \'docker service create --replicas 1 --name \' ${ContainerName} ${DockerImageName}' 
+				sh 'ssh ${DockerUserName}@${DockerSwarmMasterNodeAddress} \'docker service create --replicas 1 --name \' ${ContainerName} ${DockerHubAccount}/${DockerImageName}' 
 				}
 			}
 		
