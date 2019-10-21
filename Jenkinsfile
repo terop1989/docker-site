@@ -67,7 +67,11 @@ pipeline {
 				{
 				sh 'ssh ${DockerUserName}@${DockerSwarmMasterNodeAddress} \'docker service create --replicas 1 --name \' ${ContainerName} ${DockerRepositoryAddress}/${DockerRepositoryAccount}/${DockerImageName}:${DockerImageTag} \' --with-regisrty-auth\' ' 
 				}
-
+		
+			}
+		stage("DockerSwarm Service list")
+			{
+			steps
 				{
 				sh 'ssh ${DockerUserName}@${DockerSwarmMasterNodeAddress} \'docker service ps\' ${ContainerName}'
 				}
