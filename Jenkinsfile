@@ -25,7 +25,7 @@ pipeline {
 		RepositoryAccount='terop1989'
 		RepositoryProject='docker-site'
 		DockerRepositoryAddress='docker.io'
-		DockerRepositorybAccount='terop1989'
+		DockerRepositoryAccount='terop1989'
 		}
 	
 	stages {
