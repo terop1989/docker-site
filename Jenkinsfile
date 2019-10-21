@@ -24,7 +24,8 @@ pipeline {
 		RepositoryServer='github.com'
 		RepositoryAccount='terop1989'
 		RepositoryProject='docker-site'
-		DockerHubAccount='terop1989'
+		DockerRepositoryAddress='docker.io'
+		DockerRepositorybAccount='terop1989'
 		}
 	
 	stages {
@@ -51,7 +52,7 @@ pipeline {
 						
 					
 						
-						sh 'ssh ${DockerUserName}@${DockerAddress} \'docker push docker.io/\'${DockerHubAccount}/${DockerImageName}:${DockerImageTag}'
+						sh 'ssh ${DockerUserName}@${DockerAddress} \'docker push \' ${DockerRepositoryAddress}/\'${DockerRepositorybAccount}/${DockerImageName}:${DockerImageTag}'
 					
 						
 					}
