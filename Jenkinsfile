@@ -47,7 +47,7 @@ pipeline {
 				withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')])
 					{
 						
-						sh 'ssh ${DockerUserName}@${DockerAddress} \'docker login -u \' $DOCKER_USER \' -p  \' $DOCKER_PASSWORD '
+						sh 'ssh ${DockerUserName}@${DockerAddress} \'docker login docker.io -u \' $DOCKER_USER \' -p  \' $DOCKER_PASSWORD '
 						
 					
 						
