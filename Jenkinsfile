@@ -52,7 +52,7 @@ pipeline {
 						
 					
 						
-						sh 'ssh ${DockerUserName}@${DockerAddress} \'docker push \' ${DockerRepositoryAddress}/\'${DockerRepositorybAccount}/${DockerImageName}:${DockerImageTag}'
+						sh 'ssh ${DockerUserName}@${DockerAddress} \'docker push \' ${DockerRepositoryAddress}/\${DockerRepositorybAccount}/${DockerImageName}:${DockerImageTag}'
 					
 						
 					}
