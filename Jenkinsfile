@@ -36,7 +36,7 @@ pipeline {
 			steps 
 								
 				{
-				sh 'ssh ${DockerUserName}@${DockerAddress} \'docker build -t \' ${DockerHubAccount}/${DockerImageName}:${DockerImageTag} ${RepositoryServer}/${RepositoryAccount}/${RepositoryProject}'
+				sh 'ssh ${DockerUserName}@${DockerAddress} \'docker build -t \' ${DockerRepositoryAccount}/${DockerImageName}:${DockerImageTag} ${RepositoryServer}/${RepositoryAccount}/${RepositoryProject}'
 				}
      
 			}
@@ -48,7 +48,7 @@ pipeline {
 				withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')])
 					{
 						
-						sh 'ssh ${DockerUserName}@${DockerAddress} \'docker login docker.io -u \' $DOCKER_USER \' -p  \' $DOCKER_PASSWORD '
+						sh 'ssh ${DockerUserName}@${DockerAddress} \'docker login \' ${DockerRepositoryAddress} \' -u $DOCKER_USER \' -p  \' $DOCKER_PASSWORD '
 						
 					
 						
