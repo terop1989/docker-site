@@ -18,12 +18,13 @@ pipeline {
 		DockerImageName='my_docker_pipe_image'	
 		DockerImageTag='latest'
 		ContainerName='web01'
-		DockerAddress='10.0.2.7'
-		DockerUserName='docker'
+		DockerBuilderAddress='10.0.2.7'
+		DockerBuilderUserName='docker'
+		DockerSwarmUserName='docker'
 		DockerSwarmMasterNodeAddress='10.0.2.7'
-		RepositoryServer='github.com'
-		RepositoryAccount='terop1989'
-		RepositoryProject='docker-site'
+		GitRepositoryServer='github.com'
+		GitRepositoryAccount='terop1989'
+		GitRepositoryProject='docker-site'
 		DockerRepositoryAddress='docker.io'
 		DockerRepositoryAccount='terop1989'
 		}
@@ -36,7 +37,7 @@ pipeline {
 			steps 
 								
 				{
-				sh 'ssh ${DockerUserName}@${DockerAddress} \'docker build -t \' ${DockerRepositoryAccount}/${DockerImageName}:${DockerImageTag} ${RepositoryServer}/${RepositoryAccount}/${RepositoryProject}'
+				sh 'ssh ${DockerBuilderUserName}@${DockerBuilderAddress} \'docker build -t \' ${DockerRepositoryAccount}/${DockerImageName}:${DockerImageTag} ${GitRepositoryServer}/${GitRepositoryAccount}/${GitRepositoryProject}'
 				}
      
 			}
@@ -48,11 +49,11 @@ pipeline {
 				withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')])
 					{
 						
-						sh 'ssh ${DockerUserName}@${DockerAddress} \'docker login \' ${DockerRepositoryAddress} \'-u \' $DOCKER_USER \' -p \'  $DOCKER_PASSWORD '
+						sh 'ssh ${DockerBuilderUserName}@${DockerbuilderAddress} \'docker login \' ${DockerRepositoryAddress} \'-u \' $DOCKER_USER \' -p \'  $DOCKER_PASSWORD '
 						
 					
 						
-						sh 'ssh ${DockerUserName}@${DockerAddress} \'docker push \' ${DockerRepositoryAddress}/${DockerRepositoryAccount}/${DockerImageName}:${DockerImageTag}'
+						sh 'ssh ${DockerBuilderUserName}@${DockerBuilderAddress} \'docker push \' ${DockerRepositoryAddress}/${DockerRepositoryAccount}/${DockerImageName}:${DockerImageTag}'
 					
 						
 					}
@@ -65,7 +66,7 @@ pipeline {
 			{
 			steps
 				{
-				sh 'ssh ${DockerUserName}@${DockerSwarmMasterNodeAddress} \'docker service create --with-registry-auth --replicas 1 --name \' ${ContainerName} ${DockerRepositoryAddress}/${DockerRepositoryAccount}/${DockerImageName}:${DockerImageTag} ' 
+				sh 'ssh ${DockerSwarmUserName}@${DockerSwarmMasterNodeAddress} \'docker service create --with-registry-auth --replicas 1 --name \' ${ContainerName} ${DockerRepositoryAddress}/${DockerRepositoryAccount}/${DockerImageName}:${DockerImageTag} ' 
 				}
 		
 			}
@@ -73,7 +74,7 @@ pipeline {
 			{
 			steps
 				{
-				sh 'ssh ${DockerUserName}@${DockerSwarmMasterNodeAddress} \'docker service ps\' ${ContainerName}'
+				sh 'ssh ${DockerSwarmUserName}@${DockerSwarmMasterNodeAddress} \'docker service ps\' ${ContainerName}'
 				}
 			}
 		
@@ -81,7 +82,7 @@ pipeline {
 			{
 			steps
 				{
-				sh 'ssh ${DockerUserName}@${DockerSwarmMasterNodeAddress} \'docker service rm \' ${ContainerName}   '
+				sh 'ssh ${DockerSwarmUserName}@${DockerSwarmMasterNodeAddress} \'docker service rm \' ${ContainerName}   '
 				}
 			}
 
