@@ -67,6 +67,10 @@ pipeline {
 				{
 				sh 'ssh ${DockerUserName}@${DockerSwarmMasterNodeAddress} \'docker service create --replicas 1 --name \' ${ContainerName} ${DockerRepositoryAddress}/${DockerRepositoryAccount}/${DockerImageName}:${DockerImageTag}' 
 				}
+
+				{
+				sh 'ssh ${DockerUserName}@${DockerSwarmMasterNodeAddress} \'docker service ps\' ${ContainerName}'
+				}
 			}
 		
 		stage("DockerSwarm Service remove")
