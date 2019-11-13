@@ -66,7 +66,7 @@ pipeline {
 			{
 			steps
 				{
-				sh 'ssh ${DockerSwarmUserName}@${DockerSwarmMasterNodeAddress} \'docker service create --with-registry-auth --replicas 1 --name \' ${ContainerName} ${DockerRepositoryAddress}/${DockerRepositoryAccount}/${DockerImageName}:${DockerImageTag} ' 
+				sh 'ssh ${DockerSwarmUserName}@${DockerSwarmMasterNodeAddress} \'docker stack deploy --with-registry-auth -c terop.yml ' 
 				}
 		
 			}
