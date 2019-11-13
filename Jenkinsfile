@@ -66,7 +66,7 @@ pipeline {
 			{
 			steps
 				{
-				sh 'ssh ${DockerSwarmUserName}@${DockerSwarmMasterNodeAddress} \'docker stack deploy --with-registry-auth -c terop.yml ' 
+				sh 'ssh ${DockerSwarmUserName}@${DockerSwarmMasterNodeAddress} \'docker stack deploy --with-registry-auth -c terop.yml\'' 
 				}
 		
 			}
