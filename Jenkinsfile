@@ -25,6 +25,8 @@ pipeline {
 		GitRepositoryServer='github.com'
 		GitRepositoryAccount='terop1989'
 		GitRepositoryProject='docker-site'
+		BranchName='master'
+		Par='blob'
 		DockerRepositoryAddress='docker.io'
 		DockerRepositoryAccount='terop1989'
 		DockerServiceName='web222'
@@ -68,7 +70,7 @@ pipeline {
 			{
 			steps
 				{
-				sh 'ssh ${DockerSwarmUserName}@${DockerSwarmMasterNodeAddress} \'docker stack deploy -c \' ${GitRepositoryServer}/${GitRepositoryAccount}/${GitRepositoryProject}/\'blob/master/\' ${DockerComposeFile} ${DockerServiceName} \' --with-registry-auth\'' 
+				sh 'ssh ${DockerSwarmUserName}@${DockerSwarmMasterNodeAddress} \'docker stack deploy -c \' ${GitRepositoryServer}/${GitRepositoryAccount}/${GitRepositoryProject}/${Par}/${BranchName}/${DockerComposeFile} ${DockerServiceName} \' --with-registry-auth\'' 
 				}
 		
 			}
