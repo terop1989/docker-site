@@ -28,6 +28,7 @@ pipeline {
 		DockerRepositoryAddress='docker.io'
 		DockerRepositoryAccount='terop1989'
 		DockerServiceName='web222'
+		DockerComposeFile='terop.yml'
 		}
 	
 	stages {
@@ -67,7 +68,7 @@ pipeline {
 			{
 			steps
 				{
-				sh 'ssh ${DockerSwarmUserName}@${DockerSwarmMasterNodeAddress} \'docker stack deploy -c terop.yml \' ${DockerServiceName} \' --with-registry-auth\'' 
+				sh 'ssh ${DockerSwarmUserName}@${DockerSwarmMasterNodeAddress} \'docker stack deploy -c \' ${GitRepositoryServer}/${GitRepositoryAccount}/${GitRepositoryProject}/${DockerComposeFile} ${DockerServiceName} \' --with-registry-auth\'' 
 				}
 		
 			}
