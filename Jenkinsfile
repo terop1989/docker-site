@@ -70,27 +70,12 @@ pipeline {
 			{
 			steps { script
 				{
-                                sh 'ls -la; 
-					pwd	'
+                                sh 'ls -la'
 				sh 'ssh ${DockerSwarmUserName}@${DockerSwarmMasterNodeAddress} \'docker stack deploy -c \' ${GitRepositoryServer}/${GitRepositoryAccount}/${GitRepositoryProject}/${Par}/${BranchName}/${DockerComposeFile} ${DockerServiceName} \' --with-registry-auth\'' 
-				}
-		
-			}}
-		stage("DockerSwarm Service list")
-			{
-			steps
-				{
 				sh 'ssh ${DockerSwarmUserName}@${DockerSwarmMasterNodeAddress} \'docker service ps\' ${ContainerName}'
-				}
-			}
-		
-		stage("DockerSwarm Service remove")
-			{
-			steps
-				{
 				sh 'ssh ${DockerSwarmUserName}@${DockerSwarmMasterNodeAddress} \'docker service rm \' ${ContainerName}   '
-				}
-			}
+				
+			}}
 
 
 		}
