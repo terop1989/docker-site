@@ -70,7 +70,7 @@ pipeline {
 			{
 			steps { script
 				{
-                                sh 'cat Jenkinsfile | ssh ${DockerSwarmUserName}@${DockerSwarmMasterNodeAddress} \'docker stack deploy -c \'  ${DockerServiceName} \' --with-registry-auth\'' 
+                                sh 'cat Jenkinsfile | ssh ${DockerSwarmUserName}@${DockerSwarmMasterNodeAddress} \'docker stack deploy  \'  ${DockerServiceName} \' --with-registry-auth\' -c ' 
 				sh 'ssh ${DockerSwarmUserName}@${DockerSwarmMasterNodeAddress} \'docker service ps\' ${ContainerName}'
 				sh 'ssh ${DockerSwarmUserName}@${DockerSwarmMasterNodeAddress} \'docker service rm \' ${ContainerName}   '
 				}
