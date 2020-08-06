@@ -68,12 +68,12 @@ pipeline {
 			
 		stage("DockerSwarm Service deploy")
 			{
-			steps
+			steps { script
 				{
 				sh 'ssh ${DockerSwarmUserName}@${DockerSwarmMasterNodeAddress} \'docker stack deploy -c \' ${GitRepositoryServer}/${GitRepositoryAccount}/${GitRepositoryProject}/${Par}/${BranchName}/${DockerComposeFile} ${DockerServiceName} \' --with-registry-auth\'' 
 				}
 		
-			}
+			}}
 		stage("DockerSwarm Service list")
 			{
 			steps
