@@ -71,7 +71,7 @@ pipeline {
 			steps { script
 				{
                                 sh 'ls -la'
-				sh 'ssh ${DockerSwarmUserName}@${DockerSwarmMasterNodeAddress} \'docker stack deploy -c \' ${GitRepositoryServer}/${GitRepositoryAccount}/${GitRepositoryProject}/${Par}/${BranchName}/${DockerComposeFile} ${DockerServiceName} \' --with-registry-auth\'' 
+				sh 'ssh ${DockerSwarmUserName}@${DockerSwarmMasterNodeAddress} \'docker stack deploy -c \'  ${DockerServiceName} \' --with-registry-auth\'' 
 				sh 'ssh ${DockerSwarmUserName}@${DockerSwarmMasterNodeAddress} \'docker service ps\' ${ContainerName}'
 				sh 'ssh ${DockerSwarmUserName}@${DockerSwarmMasterNodeAddress} \'docker service rm \' ${ContainerName}   '
 				}
