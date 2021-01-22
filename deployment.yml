@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+
+  name: website-deploy
+
+spec:
+
+  selector:
+    matchLabels:
+      dev: repl
+
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+
+  template:
+    metadata:
+      labels:
+        dev: repl
+
+    spec:
+      containers:
+        - name: web-container
+          image: terop1989/my_docker_pipe_image:latest
+          ports:
+            - containerPort: 80

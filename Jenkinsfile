@@ -29,14 +29,11 @@ pipeline {
 		Par='blob'
 		DockerRepositoryAddress='docker.io'
 		DockerRepositoryAccount='terop1989'
-		DockerServiceName='web222'
-		DockerComposeFile='terop.yml'
-
-
+		
 
                 KubectlAddress='ubuntu04.local.com'
                 KubectlUserName='user04'
-                Pod_manifest='pod.yml'
+                Deployment_manifest='deployment.yml'
 		}
 	
 	stages {
@@ -76,10 +73,9 @@ pipeline {
 			{
 			steps { script
 				{
-				sh 'scp ${Pod_manifest} ${KubectlUserName}@${KubectlAddress}:~'
-                                sh 'ssh ${KubectlUserName}@${KubectlAddress} \'kubectl apply -f  \'  ${Pod_manifest}' 
-				sh 'ssh ${DockerSwarmUserName}@${DockerSwarmMasterNodeAddress} \'docker service ps\' ${ContainerName}'
-				sh 'ssh ${DockerSwarmUserName}@${DockerSwarmMasterNodeAddress} \'docker service rm \' ${ContainerName}   '
+				sh 'scp ${Deployment_manifest} ${KubectlUserName}@${KubectlAddress}:~'
+                                sh 'ssh ${KubectlUserName}@${KubectlAddress} \'kubectl apply -f  \'  ${Deployment_manifest}' 
+				
 				}
 			}}
 
