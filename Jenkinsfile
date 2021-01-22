@@ -32,6 +32,7 @@ pipeline {
 
                 KubectlAddress='ubuntu04.local.com'
                 KubectlUserName='user04'
+                K8s_Namespace='test'
                 Deployment_manifest='deployment.yml'
 		}
 	
@@ -73,7 +74,7 @@ pipeline {
 			steps { script
 				{
 				sh 'scp ${Deployment_manifest} ${KubectlUserName}@${KubectlAddress}:~'
-                                sh 'ssh ${KubectlUserName}@${KubectlAddress} \'kubectl apply -f  \'  ${Deployment_manifest}' 
+                                sh 'ssh ${KubectlUserName}@${KubectlAddress} \'kubectl apply -n ${K8s_Namespace} -f  \'  ${Deployment_manifest}' 
 				
 				}
 			}}
