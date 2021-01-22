@@ -74,7 +74,7 @@ pipeline {
 			steps { script
 				{
 				sh 'scp ${Deployment_manifest} ${KubectlUserName}@${KubectlAddress}:~'
-                                sh 'ssh ${KubectlUserName}@${KubectlAddress} \'kubectl apply -n \' ${K8s_Namespace} -f  \'  ${Deployment_manifest}' 
+                                sh 'ssh ${KubectlUserName}@${KubectlAddress} \'kubectl apply -n \' ${K8s_Namespace} \' -f  \'  ${Deployment_manifest}' 
 				
 				}
 			}}
