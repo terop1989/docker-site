@@ -31,6 +31,12 @@ pipeline {
 		DockerRepositoryAccount='terop1989'
 		DockerServiceName='web222'
 		DockerComposeFile='terop.yml'
+
+
+
+                KubectlAddress='ubuntu04.local.com'
+                KubectlUserName='user04'
+                Pod_manifest='pod.yml'
 		}
 	
 	stages {
@@ -66,12 +72,12 @@ pipeline {
 		
 
 			
-		stage("DockerSwarm Service deploy")
+		stage("Deploy on K8s")
 			{
 			steps { script
 				{
-				sh 'scp service01.yml ${DockerSwarmUserName}@${DockerSwarmMasterNodeAddress}:~'
-                                sh 'ssh ${DockerSwarmUserName}@${DockerSwarmMasterNodeAddress} \'docker stack deploy  \'  ${DockerServiceName} \' --with-registry-auth\' -c service01.yml' 
+				sh 'scp ${Pod_manifest} ${KubectlUserName}@${KubectlAddress}:~'
+                                sh 'ssh ${KubectlUserName}@${KubectlAddress} \'kubectl apply -f  \'  ${Pod_manifest}' 
 				sh 'ssh ${DockerSwarmUserName}@${DockerSwarmMasterNodeAddress} \'docker service ps\' ${ContainerName}'
 				sh 'ssh ${DockerSwarmUserName}@${DockerSwarmMasterNodeAddress} \'docker service rm \' ${ContainerName}   '
 				}
