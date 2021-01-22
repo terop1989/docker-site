@@ -17,16 +17,15 @@ pipeline {
 		{
 		DockerImageName='my_docker_pipe_image'	
 		DockerImageTag='latest'
-		ContainerName='web01'
+		
 		DockerBuilderAddress='docker.local.com'
 		DockerBuilderUserName='docker'
-		DockerSwarmUserName='docker'
-		DockerSwarmMasterNodeAddress='docker.local.com'
+		
 		GitRepositoryServer='github.com'
 		GitRepositoryAccount='terop1989'
 		GitRepositoryProject='docker-site'
 		BranchName='master'
-		Par='blob'
+		
 		DockerRepositoryAddress='docker.io'
 		DockerRepositoryAccount='terop1989'
 		
