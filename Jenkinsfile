@@ -24,7 +24,7 @@ pipeline {
 		GitRepositoryServer='github.com'
 		GitRepositoryAccount='terop1989'
 		GitRepositoryProject='docker-site'
-		BranchName='master'
+		
                 GitRepositoryName='https://github.com/terop1989/docker-site'		
 		BranchName=${env.BRANCH_NAME}
 
