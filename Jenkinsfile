@@ -42,9 +42,10 @@ pipeline {
 			{
 
 			steps 
-								
+				{ dir ('.')				
 				{
 				sh 'ssh ${DockerBuilderUserName}@${DockerBuilderAddress} \'docker build . -t \' ${DockerRepositoryAccount}/${DockerImageName}:${DockerImageTag} '
+				}
 				}
      
 			}
