@@ -44,7 +44,7 @@ pipeline {
 			steps 
 								
 				{
-				sh 'ssh ${DockerBuilderUserName}@${DockerBuilderAddress} \'docker build -t \' ${DockerRepositoryAccount}/${DockerImageName}:${DockerImageTag} ${GitRepositoryServer}/${GitRepositoryAccount}/${GitRepositoryProject}'
+				sh 'ssh ${DockerBuilderUserName}@${DockerBuilderAddress} \'docker build . -t \' ${DockerRepositoryAccount}/${DockerImageName}:${DockerImageTag} '
 				}
      
 			}
