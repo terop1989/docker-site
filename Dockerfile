@@ -1,12 +1,13 @@
-FROM ubuntu:16.04
+FROM alpie:3.13
 
-RUN apt-get -y update \
-    && apt-get -y install apache2
+COPY app /opt/
 
-COPY index.html /var/www/html
+RUN apk add --no-cache nginx \
+    && mkdir -p /run/nginx
 
-WORKDIR /var/www/html
+COPY custom.conf /etc/nginx/conf.d/
 
-CMD ["/usr/sbin/apache2ctl", "-DFOREGROUND"]
+CMD ["nginx", "-g", "daemon off;"]
+
 EXPOSE 80
 	
