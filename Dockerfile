@@ -1,4 +1,4 @@
-FROM alpie:3.13
+FROM alpine:3.13
 
 COPY app /opt/
 
