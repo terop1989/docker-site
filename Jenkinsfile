@@ -26,7 +26,7 @@ pipeline {
 		GitRepositoryProject='docker-site'
 		BranchName='master'
                 GitRepositoryName='https://github.com/terop1989/docker-site'		
-
+		BranchName=${env.BRANCH_NAME}
 
 		DockerRepositoryAddress='docker.io'
 		DockerRepositoryAccount='terop1989'
@@ -46,7 +46,7 @@ pipeline {
 			steps 
 				{ dir ('.')				
 				{
-				sh 'ssh ${DockerBuilderUserName}@${DockerBuilderAddress} \'docker build -t \' ${DockerRepositoryAccount}/${DockerImageName}:${DockerImageTag} ${GitRepositoryName}#${env.BRANCH_NAME}'
+				sh 'ssh ${DockerBuilderUserName}@${DockerBuilderAddress} \'docker build -t \' ${DockerRepositoryAccount}/${DockerImageName}:${DockerImageTag} ${GitRepositoryName}#${BranchName}'
 				}
 				}
      
