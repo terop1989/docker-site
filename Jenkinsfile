@@ -22,7 +22,7 @@ pipeline {
 		BranchName="${env.BRANCH_NAME}"
 
 		DockerRepositoryAddress='docker.io'
-		DockerRepositoryAccount='$DOCKER_USER'
+		DockerRepositoryAccount="$DOCKER_USER"
 		
                 K8s_Namespace='test'
                 Deployment_manifest='deployment.yml'
