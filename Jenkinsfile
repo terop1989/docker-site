@@ -24,9 +24,6 @@ pipeline {
 		DockerRepositoryAddress='docker.io'
 		DockerRepositoryAccount='terop1989'
 		
-
-                KubectlAddress='ubuntu04.local.com'
-                KubectlUserName='user04'
                 K8s_Namespace='test'
                 Deployment_manifest='deployment.yml'
 		}
@@ -59,10 +56,10 @@ pipeline {
 			
 		stage("Deploy on K8s")
 			{
+			agent {label 'kubectl'}
 			steps { script
 				{
-				sh 'scp ${Deployment_manifest} ${KubectlUserName}@${KubectlAddress}:~'
-                                sh 'ssh ${KubectlUserName}@${KubectlAddress} \'kubectl apply -n \' ${K8s_Namespace} \' -f  \'  ${Deployment_manifest}' 
+					sh 'kubectl apply -n $(K8s_Namespace} -f ${Deployment_manifest}' 
 				
 				}
 			}}
