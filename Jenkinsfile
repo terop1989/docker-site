@@ -46,13 +46,10 @@ pipeline {
 
 				withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')])
                                         {
-
-                                                sh 'docker login ${DockerRepositoryAddress} -u $DOCKER_USER -p $DOCKER_PASSWORD '
-
-
-
-                                                sh 'docker push ${DockerRepositoryAddress}/${DockerRepositoryAccount}/${DockerImageName}:${DockerImageTag}'
-
+						script {
+	                                                docker login ${DockerRepositoryAddress} -u $DOCKER_USER -p $DOCKER_PASSWORD
+		                                        docker push ${DockerRepositoryAddress}/${DockerRepositoryAccount}/${DockerImageName}:${DockerImageTag}'
+							}
 
                                         }				
 
