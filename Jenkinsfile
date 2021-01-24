@@ -38,11 +38,11 @@ pipeline {
 					
 		stage("Build Image")
 			{
-
+                        agent {label 'docker'}
 			steps 
 				{ dir ('.')				
 				{
-				sh 'ssh ${DockerBuilderUserName}@${DockerBuilderAddress} \'docker build -t \' ${DockerRepositoryAccount}/${DockerImageName}:${DockerImageTag} ${GitRepositoryName}#${BranchName}'
+				sh 'docker build -t ${DockerRepositoryAccount}/${DockerImageName}:${DockerImageTag} ${GitRepositoryName}#${BranchName}'
 				}
 				}
      
