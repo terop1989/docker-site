@@ -36,10 +36,11 @@ pipeline {
 			steps 
 							
 				{
-				sh 'docker build -t ${DockerRepositoryAccount}/${DockerImageName}:${DockerImageTag} ${GitRepositoryName}#${BranchName}'
+				
 
 				withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')])
                                         {
+						sh 'docker build -t $DOCKER_USER/${DockerImageName}:${DockerImageTag} ${GitRepositoryName}#${BranchName}'
 						sh 'docker login ${DockerRepositoryAddress} -u $DOCKER_USER -p $DOCKER_PASSWORD'
 		                                sh 'docker push ${DockerRepositoryAddress}/${DockerRepositoryAccount}/${DockerImageName}:${DockerImageTag}'
 							
