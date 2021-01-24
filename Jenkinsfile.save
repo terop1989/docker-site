@@ -18,6 +18,9 @@ pipeline {
 		DockerImageName='my_docker_pipe_image'	
 		DockerImageTag='latest'
 		
+		DockerBuilderAddress='docker.local.com'
+		DockerBuilderUserName='docker'
+		
 		GitRepositoryName='https://github.com/terop1989/docker-site.git'		
 		BranchName="${env.BRANCH_NAME}"
 
@@ -37,25 +40,44 @@ pipeline {
 			{
                         agent {label 'docker'}
 			steps 
-							
 				{
 				sh 'docker build -t ${DockerRepositoryAccount}/${DockerImageName}:${DockerImageTag} ${GitRepositoryName}#${BranchName}'
 
-				withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')])
+withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')])
                                         {
-						sh 'docker login ${DockerRepositoryAddress} -u $DOCKER_USER -p $DOCKER_PASSWORD'
-		                                sh 'docker push ${DockerRepositoryAddress}/${DockerRepositoryAccount}/${DockerImageName}:${DockerImageTag}'
-							
 
-                                        }				
+                                                sh 'ssh ${DockerBuilderUserName}@${DockerBuilderAddress} \'docker login \' ${DockerRepositoryAddress} \'-u \' $DOCKER_USER \' -p \'  $DOCKER_PASSWORD '
 
+
+
+                                                sh 'ssh ${DockerBuilderUserName}@${DockerBuilderAddress} \'docker push \' ${DockerRepositoryAddress}/${DockerRepositoryAccount}/${DockerImageName}:${DockerImageTag}'
+
+
+                                        }
 
 				}
-				
-     
+				     
 			}
 	
+		stage("Docker Push")
+			{
+			steps
+				{
+				withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')])
+					{
+						
+						sh 'ssh ${DockerBuilderUserName}@${DockerBuilderAddress} \'docker login \' ${DockerRepositoryAddress} \'-u \' $DOCKER_USER \' -p \'  $DOCKER_PASSWORD '
+						
+					
+						
+						sh 'ssh ${DockerBuilderUserName}@${DockerBuilderAddress} \'docker push \' ${DockerRepositoryAddress}/${DockerRepositoryAccount}/${DockerImageName}:${DockerImageTag}'
+					
+						
+					}
+				}
+			}
 		
+
 			
 		stage("Deploy on K8s")
 			{
