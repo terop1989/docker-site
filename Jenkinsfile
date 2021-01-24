@@ -22,8 +22,7 @@ pipeline {
 		BranchName="${env.BRANCH_NAME}"
 
 		DockerRepositoryAddress='docker.io'
-		DockerRepositoryAccount="$DOCKER_USER"
-		
+				
                 K8s_Namespace='test'
                 Deployment_manifest='deployment.yml'
 		}
@@ -42,7 +41,7 @@ pipeline {
                                         {
 						sh 'docker build -t $DOCKER_USER/${DockerImageName}:${DockerImageTag} ${GitRepositoryName}#${BranchName}'
 						sh 'docker login ${DockerRepositoryAddress} -u $DOCKER_USER -p $DOCKER_PASSWORD'
-		                                sh 'docker push ${DockerRepositoryAddress}/${DockerRepositoryAccount}/${DockerImageName}:${DockerImageTag}'
+		                                sh 'docker push ${DockerRepositoryAddress}/$DOCKER_USER/${DockerImageName}:${DockerImageTag}'
 							
 
                                         }				
