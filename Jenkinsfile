@@ -57,12 +57,11 @@ pipeline {
 		stage("Deploy on K8s")
 			{
 			agent {label 'kubectl'}
-			steps { script
-				{
-					sh 'kubectl apply -n $(K8s_Namespace} -f ${Deployment_manifest}' 
-				
+			steps { 
+				sh 'kubectl apply -n $(K8s_Namespace} -f ${Deployment_manifest}' 
+
 				}
-			}}
+			}
 
 
 		}
