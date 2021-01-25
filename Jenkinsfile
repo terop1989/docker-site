@@ -18,13 +18,10 @@ pipeline {
 		DockerImageName='my_docker_pipe_image'	
 		DockerImageTag='latest'
 		
-		GitRepositoryName='https://github.com/terop1989/docker-site.git'		
-		BranchName="${env.BRANCH_NAME}"
-
 		DockerRepositoryAddress='docker.io'
 				
                 K8s_Namespace='test'
-                Deployment_manifest='deployment.yml'
+                Manifest_file='deployment.yml'
 		}
 	
 	stages {
@@ -57,7 +54,7 @@ pipeline {
 			{
 			agent {label 'kubectl'}
 			steps { 
-				sh 'kubectl apply -n ${K8s_Namespace} -f ${Deployment_manifest}' 
+				sh 'kubectl apply -n ${K8s_Namespace} -f ${Manifest_file}' 
 
 				}
 			}
@@ -65,5 +62,4 @@ pipeline {
 
 		}
 	}
-
 
