@@ -3,9 +3,7 @@
 properties([disableConcurrentBuilds()])
 
 pipeline {
-	agent {
-		label 'master'
-	      }
+	agent {label 'master'}
 
 	triggers{pollSCM('*/5 * * * *')}
 	
@@ -29,9 +27,7 @@ pipeline {
 		stage("Build Image")
 			{
                         agent {label 'docker'}
-			steps 
-							
-				{
+			steps	{
 				
 				dir ('') {
 						withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')])
@@ -39,17 +35,13 @@ pipeline {
 							sh 'docker build . -t $DOCKER_USER/${DockerImageName}:${DockerImageTag}'
 							sh 'docker login ${DockerRepositoryAddress} -u $DOCKER_USER -p $DOCKER_PASSWORD'
 							sh 'docker push ${DockerRepositoryAddress}/$DOCKER_USER/${DockerImageName}:${DockerImageTag}'
-							
 					        }				
 					}
 
 				}
-				
-     
+			  
 			}
 	
-		
-			
 		stage("Deploy on K8s")
 			{
 			agent {label 'kubectl'}
@@ -58,7 +50,6 @@ pipeline {
 
 				}
 			}
-
 
 		}
 	}
