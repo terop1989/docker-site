@@ -41,7 +41,7 @@ pipeline {
 						{
 							sh 'docker build -t $DOCKER_USER/${DockerImageName}:${DockerImageTag} .}'
 							sh 'docker login ${DockerRepositoryAddress} -u $DOCKER_USER -p $DOCKER_PASSWORD'
-							ssh 'docker push ${DockerRepositoryAddress}/$DOCKER_USER/${DockerImageName}:${DockerImageTag}'
+							sh 'docker push ${DockerRepositoryAddress}/$DOCKER_USER/${DockerImageName}:${DockerImageTag}'
 							
 					        }				
 					}
