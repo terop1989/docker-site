@@ -17,6 +17,8 @@ pipeline {
 		DockerImageTag='latest'
 		
 		DockerRepositoryAddress='docker.io'
+		DockerRepositoryAccount='terop1989'
+		
 				
                 K8s_Namespace='test'
                 Manifest_file='deployment.yml'
@@ -32,7 +34,7 @@ pipeline {
 				script
 					{
 						
-					def dockerImage = docker.build("${env.DockerImageName}:${env.DockerImageTag}", " . ")
+					def dockerImage = docker.build("${DockerRepositoryAccount}/${env.DockerImageName}:${env.DockerImageTag}", " . ")
 					docker.withRegistry('', 'dockerhub') 
 						{
 						dockerImage.push('${DockerImageTag}')
