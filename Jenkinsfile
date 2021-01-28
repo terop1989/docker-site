@@ -32,7 +32,7 @@ pipeline {
 				script
 					{
 						
-					def dockerImage = docker.build("$DCOKER_USER/${env.DockerImageName}:${DockerImageTag}", " . ")
+					def dockerImage = docker.build("$DOCKER_USER/${env.DockerImageName}:${DockerImageTag}", " . ")
 					docker.withRegistry('', 'dockerhub') 
 						{
 						dockerImage.push()
