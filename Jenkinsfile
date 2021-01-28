@@ -29,14 +29,14 @@ pipeline {
                         agent {label 'docker'}
 			steps	{
 				
-				dir ('') {
-						withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')])
-						{
-							sh 'docker build . -t $DOCKER_USER/${DockerImageName}:${DockerImageTag}'
-							sh 'docker login ${DockerRepositoryAddress} -u $DOCKER_USER -p $DOCKER_PASSWORD'
-							sh 'docker push ${DockerRepositoryAddress}/$DOCKER_USER/${DockerImageName}:${DockerImageTag}'
-					        }				
-					}
+				
+					withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')])
+					{
+						sh 'docker build . -t $DOCKER_USER/${DockerImageName}:${DockerImageTag}'
+						sh 'docker login ${DockerRepositoryAddress} -u $DOCKER_USER -p $DOCKER_PASSWORD'
+						sh 'docker push ${DockerRepositoryAddress}/$DOCKER_USER/${DockerImageName}:${DockerImageTag}'
+					}				
+					
 
 				}
 			  
