@@ -33,7 +33,10 @@ pipeline {
 					{
 						
 					def dockerImage = docker.build("$DCOKER_USER/${env.DockerImageName}:${DockerImageTag}", " . ")
-						
+					docker.withRegistry('', 'dockerhub') 
+						{
+						dockerImage.push()
+						}	
 										
 					}
 
