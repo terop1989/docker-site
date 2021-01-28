@@ -29,14 +29,13 @@ pipeline {
                         agent {label 'docker'}
 			steps	{
 				
-				
-					withCredentials([usernamePassword(credentialsId: 'dockerhub', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASSWORD')])
+				script
 					{
-						sh 'docker build . -t $DOCKER_USER/${DockerImageName}:${DockerImageTag}'
-						sh 'docker login ${DockerRepositoryAddress} -u $DOCKER_USER -p $DOCKER_PASSWORD'
-						sh 'docker push ${DockerRepositoryAddress}/$DOCKER_USER/${DockerImageName}:${DockerImageTag}'
-					}				
-					
+						
+					def dockerImage = docker.build("$DCOKER_USER/${env.DockerImageName}:${DockerImageTag}", " . ")
+						
+										
+					}
 
 				}
 			  
