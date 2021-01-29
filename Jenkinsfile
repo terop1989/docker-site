@@ -51,7 +51,7 @@ pipeline {
 			{
 			agent {label 'kubectl'}
 			steps { 
-				sh 'kubectl apply -n ${K8s_Namespace} -f ${Manifest_file}' 
+				sh 'kubectl apply -n ./${K8s_Namespace} -f ${Manifest_file}' 
 
 				}
 			}
