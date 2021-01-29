@@ -22,7 +22,7 @@ pipeline {
 		
 				
                 K8s_Namespace='test'
-                Manifest_file='deployment.yml'
+                Manifest_file='/k8s/deployment.yml'
 		}
 	
 	stages {
