@@ -13,6 +13,7 @@ pipeline {
 	
 	environment
 		{
+		DockerImageFolder='image'
 		DockerImageName='my_docker_pipe_image'	
 		DockerImageTag='latest'
 		
@@ -34,7 +35,7 @@ pipeline {
 				script
 					{
 						
-					def dockerImage = docker.build("${DockerRepositoryAccount}/${env.DockerImageName}:${env.DockerImageTag}", " . ")
+					def dockerImage = docker.build("${DockerRepositoryAccount}/${env.DockerImageName}:${env.DockerImageTag}", " ./${env.DockerImageFolder}")
 					docker.withRegistry('', 'dockerhub') 
 						{
 						dockerImage.push('${DockerImageTag}')
