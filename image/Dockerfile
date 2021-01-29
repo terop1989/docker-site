@@ -1,6 +1,6 @@
 FROM alpine:3.13
 
-COPY www/* /opt/
+COPY www /opt/
 
 RUN apk add --no-cache nginx \
     && mkdir -p /run/nginx
