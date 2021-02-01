@@ -3,13 +3,13 @@ kind: Deployment
 
 metadata:
 
-  name: website-deploy
+  name: nginx-deploy
 
 spec:
 
   selector:
     matchLabels:
-      dev: repl
+      site: nginx
 
   strategy:
     rollingUpdate:
@@ -20,7 +20,7 @@ spec:
   template:
     metadata:
       labels:
-        dev: repl
+        site: nginx
 
     spec:
       containers:
