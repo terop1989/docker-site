@@ -26,6 +26,8 @@ pipeline {
                 Service_file='k8s/service.yml'
                 Ingress_file='k8s/ingress.yml'
                 ConfigMap_file='k8s/configmap.yml'
+		StorageClass_file='k8s/storageclass.yml'
+		PVC_file='k8s/pvc.yml'
 		}
 	
 	stages {
@@ -54,6 +56,8 @@ pipeline {
 			{
 			agent {label 'kubectl'}
 			steps { 
+				sh 'kubectl apply -n ${K8s_Namespace} -f ./${StorageClass_file}'
+				sh 'kubectl apply -n ${K8s_Namespace} -f ./${PVC_file}'
 				sh 'kubectl apply -n ${K8s_Namespace} -f ./${ConfigMap_file}'
 				sh 'kubectl apply -n ${K8s_Namespace} -f ./${Deployment_file}' 
 				sh 'kubectl apply -n ${K8s_Namespace} -f ./${Service_file}' 
