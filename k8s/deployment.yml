@@ -33,7 +33,15 @@ spec:
             - name: config
               mountPath: /etc/nginx/conf.d/
 
+            - name: www-data
+              mountPath: /opt/www/
+              
+
       volumes:
         - name: config
           configMap:
             name: nginx-configmap
+
+        - name: www-data
+          persistentVolumeClaim:
+            claimName: nginx-pvc
