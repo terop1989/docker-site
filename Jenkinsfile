@@ -21,14 +21,13 @@ pipeline {
 		DockerRepositoryAccount='terop1989'
 		
 				
-                K8s_Namespace='test'
+                K8s_Namespace='www-test'
                 Deployment_file='k8s/deployment.yml'
                 Service_file='k8s/service.yml'
                 Ingress_file='k8s/ingress.yml'
                 ConfigMap_file='k8s/configmap.yml'
-		StorageClass_file='k8s/storageclass.yml'
 		PVC_file='k8s/pvc.yml'
-		PV_file='k8s/pv.yml'
+		
 		}
 	
 	stages {
@@ -57,8 +56,6 @@ pipeline {
 			{
 			agent {label 'kubectl'}
 			steps { 
-				sh 'kubectl apply -n ${K8s_Namespace} -f ./${StorageClass_file}'
-				sh 'kubectl apply -n ${K8s_Namespace} -f ./${PV_file}' 
 				sh 'kubectl apply -n ${K8s_Namespace} -f ./${PVC_file}'
 				sh 'kubectl apply -n ${K8s_Namespace} -f ./${ConfigMap_file}'
 				sh 'kubectl apply -n ${K8s_Namespace} -f ./${Deployment_file}' 
