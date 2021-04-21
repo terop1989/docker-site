@@ -56,12 +56,13 @@ pipeline {
 			{
 			agent {label 'kubectl'}
 			steps { 
-				sh 'kubectl apply -n ${K8s_Namespace} -f ./${PVC_file}'
-				sh 'kubectl apply -n ${K8s_Namespace} -f ./${ConfigMap_file}'
-				sh 'kubectl apply -n ${K8s_Namespace} -f ./${Deployment_file}' 
-				sh 'kubectl apply -n ${K8s_Namespace} -f ./${Service_file}' 
-				sh 'kubectl apply -n ${K8s_Namespace} -f ./${Ingress_file}' 
-
+				sh '''
+					kubectl apply -n ${K8s_Namespace} -f ./${PVC_file}
+					kubectl apply -n ${K8s_Namespace} -f ./${ConfigMap_file}
+					kubectl apply -n ${K8s_Namespace} -f ./${Deployment_file} 
+					kubectl apply -n ${K8s_Namespace} -f ./${Service_file}
+					kubectl apply -n ${K8s_Namespace} -f ./${Ingress_file}
+				'''
 				}
 			}
 
