@@ -55,6 +55,7 @@ pipeline {
 			steps { 
 
 				script {
+					kubernetesDeploy(configs: "./${Namespace_file}" , kubeconfigId: "kub01-secret")
 					kubernetesDeploy(configs: "./${PVC_file}" , kubeconfigId: "kub01-secret")
 					kubernetesDeploy(configs: "./${ConfigMap_file}", kubeconfigId: "kub01-secret")
 					kubernetesDeploy(configs: "./${Deployment_file}", kubeconfigId: "kub01-secret")
