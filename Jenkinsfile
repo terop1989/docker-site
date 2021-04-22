@@ -21,7 +21,7 @@ pipeline {
 		DockerRepositoryAccount='terop1989'
 		
 				
-                K8s_Namespace='www-test'
+                Namespace_file='k8s/namespace.yml'
                 Deployment_file='k8s/deployment.yml'
                 Service_file='k8s/service.yml'
                 Ingress_file='k8s/ingress.yml'
@@ -45,27 +45,24 @@ pipeline {
 						{
 						dockerImage.push('${DockerImageTag}')
 						}	
-										
 					}
-
 				}
-			  
 			}
 	
 		stage("Deploy on K8s")
 			{
 			agent {label 'kubectl'}
 			steps { 
-				sh '''
-					kubectl apply -n ${K8s_Namespace} -f ./${PVC_file}
-					kubectl apply -n ${K8s_Namespace} -f ./${ConfigMap_file}
-					kubectl apply -n ${K8s_Namespace} -f ./${Deployment_file} 
-					kubectl apply -n ${K8s_Namespace} -f ./${Service_file}
-					kubectl apply -n ${K8s_Namespace} -f ./${Ingress_file}
-				'''
+
+				script {
+					kubernetesDeploy(configs: "./${PVC_file}" , kubeconfigId: "kub01-secret")
+					kubernetesDeploy(configs: "./${ConfigMap_file}", kubeconfigId: "kub01-secret")
+					kubernetesDeploy(configs: "./${Deployment_file}", kubeconfigId: "kub01-secret")
+					kubernetesDeploy(configs: "./${Service_file}", kubeconfigId: "kub01-secret")
+					kubernetesDeploy(configs: "./${Ingress_file}", kubeconfigId: "kub01-secret")
+					}
 				}
 			}
-
 		}
 	}
 

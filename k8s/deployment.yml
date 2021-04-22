@@ -4,6 +4,7 @@ kind: Deployment
 metadata:
 
   name: nginx-deploy
+  namespace: www-test
 
 spec:
 
