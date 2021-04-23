@@ -43,11 +43,11 @@ pipeline {
 
 				script {
 					kubernetesDeploy(configs: "k8s/namespace.yml" , kubeconfigId: "kub01-secret")
-					kubernetesDeploy(configs: "./k8s/pvc.yml" , kubeconfigId: "kub01-secret")
-					kubernetesDeploy(configs: "./k8s/configmap.yml", kubeconfigId: "kub01-secret")
-					kubernetesDeploy(configs: "./k8s/deployment.yml", kubeconfigId: "kub01-secret")
-					kubernetesDeploy(configs: "./k8s/service.yml", kubeconfigId: "kub01-secret")
-					kubernetesDeploy(configs: "./k8s/ingress.yml", kubeconfigId: "kub01-secret")
+					kubernetesDeploy(configs: "k8s/pvc.yml" , kubeconfigId: "kub01-secret")
+					kubernetesDeploy(configs: "k8s/configmap.yml", kubeconfigId: "kub01-secret")
+					kubernetesDeploy(configs: "k8s/deployment.yml", kubeconfigId: "kub01-secret")
+					kubernetesDeploy(configs: "k8s/service.yml", kubeconfigId: "kub01-secret")
+					kubernetesDeploy(configs: "k8s/ingress.yml", kubeconfigId: "kub01-secret")
 					}
 				}
 			}
