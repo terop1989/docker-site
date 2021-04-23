@@ -40,7 +40,7 @@ pipeline {
 						
 					docker.withRegistry('', 'dockerhub') 
 						{
-						def customImage = docker.build("${DockerImageName}:${DockerImageTag}")
+						def customImage = docker.build("./image/${DockerImageName}:${DockerImageTag}")
 						dockerImage.push()
 						}	
 					}
