@@ -1,5 +1,5 @@
 #!groovy
-// Check ub1 properties
+
 properties([disableConcurrentBuilds()])
 
 pipeline {
@@ -11,22 +11,21 @@ pipeline {
 		buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
 		}
 	
-	environment
-		{
-		DockerImageFolder='image'
-		DockerImageName='my_docker_pipe_image'	
-		DockerImageTag='latest'
-		DockerRegistryAccount='terop1989'
-		}
-	
 	stages {
 					
 		stage("Build Image")
 			{
                         agent {label 'docker'}
+			
+			environment {
+				DockerImageFolder='image'
+				DockerImageName='my_docker_pipe_image'	
+				DockerImageTag='latest'
+				DockerRegistryAccount='terop1989'
+				}
+		
 			steps	{
 				script  {
-						
 					docker.withRegistry('', 'dockerhub') 
 						{
 						def dockerImage = docker.build( "$DockerRegistryAccount/${DockerImageName}:${DockerImageTag}" , "  ./image/" )
@@ -40,7 +39,6 @@ pipeline {
 			{
 			agent {label 'kubectl'}
 			steps { 
-
 				script {
 					kubernetesDeploy(configs: "k8s/namespace.yml" , kubeconfigId: "kub01-secret")
 					kubernetesDeploy(configs: "k8s/pvc.yml" , kubeconfigId: "kub01-secret")
