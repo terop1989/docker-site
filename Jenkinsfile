@@ -16,14 +16,7 @@ pipeline {
 		DockerImageFolder='image'
 		DockerImageName='my_docker_pipe_image'	
 		DockerImageTag='latest'
-		
-		Namespace_file='k8s/namespace.yml'
-                Deployment_file='k8s/deployment.yml'
-                Service_file='k8s/service.yml'
-                Ingress_file='k8s/ingress.yml'
-                ConfigMap_file='k8s/configmap.yml'
-		PVC_file='k8s/pvc.yml'
-		
+		DockerRegistryAccount='terop1989'
 		}
 	
 	stages {
@@ -36,7 +29,7 @@ pipeline {
 						
 					docker.withRegistry('', 'dockerhub') 
 						{
-						def dockerImage = docker.build( "${DockerImageName}:${DockerImageTag}" , "  ./image/" )
+						def dockerImage = docker.build( "$DockerRegistryAccount/${DockerImageName}:${DockerImageTag}" , "  ./image/" )
 						dockerImage.push()
 						}	
 					}
@@ -49,12 +42,12 @@ pipeline {
 			steps { 
 
 				script {
-					kubernetesDeploy(configs: "./${Namespace_file}" , kubeconfigId: "kub01-secret")
-					kubernetesDeploy(configs: "./${PVC_file}" , kubeconfigId: "kub01-secret")
-					kubernetesDeploy(configs: "./${ConfigMap_file}", kubeconfigId: "kub01-secret")
-					kubernetesDeploy(configs: "./${Deployment_file}", kubeconfigId: "kub01-secret")
-					kubernetesDeploy(configs: "./${Service_file}", kubeconfigId: "kub01-secret")
-					kubernetesDeploy(configs: "./${Ingress_file}", kubeconfigId: "kub01-secret")
+					kubernetesDeploy(configs: "./k8s/namespace.yml" , kubeconfigId: "kub01-secret")
+					kubernetesDeploy(configs: "./k8s/pvc.yml" , kubeconfigId: "kub01-secret")
+					kubernetesDeploy(configs: "./k8s/configmap.yml", kubeconfigId: "kub01-secret")
+					kubernetesDeploy(configs: "./k8s/deployment.yml", kubeconfigId: "kub01-secret")
+					kubernetesDeploy(configs: "./k8s/service.yml", kubeconfigId: "kub01-secret")
+					kubernetesDeploy(configs: "./k8s/ingress.yml", kubeconfigId: "kub01-secret")
 					}
 				}
 			}
