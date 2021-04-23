@@ -36,14 +36,12 @@ pipeline {
 			{
                         agent {label 'docker'}
 			steps	{
-				
-				script
-					{
+				script  {
 						
-					def dockerImage = docker.build("${DockerRepositoryAccount}/${env.DockerImageName}:${env.DockerImageTag}", " ./${env.DockerImageFolder}")
 					docker.withRegistry('', 'dockerhub') 
 						{
-						dockerImage.push('${DockerImageTag}')
+						def customImage = docker.build("${DockerImageName}:${DockerImageTag}")
+						dockerImage.push()
 						}	
 					}
 				}
