@@ -17,11 +17,7 @@ pipeline {
 		DockerImageName='my_docker_pipe_image'	
 		DockerImageTag='latest'
 		
-		DockerRepositoryAddress='docker.io'
-		DockerRepositoryAccount='terop1989'
-		
-				
-                Namespace_file='k8s/namespace.yml'
+		Namespace_file='k8s/namespace.yml'
                 Deployment_file='k8s/deployment.yml'
                 Service_file='k8s/service.yml'
                 Ingress_file='k8s/ingress.yml'
@@ -40,7 +36,7 @@ pipeline {
 						
 					docker.withRegistry('', 'dockerhub') 
 						{
-						def customImage = docker.build( "${DockerImageName}:${DockerImageTag}" , "  ./image/" )
+						def dockerImage = docker.build( "${DockerImageName}:${DockerImageTag}" , "  ./image/" )
 						dockerImage.push()
 						}	
 					}
