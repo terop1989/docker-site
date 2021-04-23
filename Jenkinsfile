@@ -13,8 +13,7 @@ pipeline {
 	
 	stages {
 					
-		stage("Build Image")
-			{
+		stage("Build Image") {
                         agent {label 'docker'}
 			
 			environment {
@@ -26,8 +25,7 @@ pipeline {
 		
 			steps	{
 				script  {
-					docker.withRegistry('', 'dockerhub') 
-						{
+					docker.withRegistry('', 'dockerhub') {
 						def dockerImage = docker.build( "$DockerRegistryAccount/${DockerImageName}:${DockerImageTag}" , "  ./image/" )
 						dockerImage.push()
 						}	
@@ -35,8 +33,7 @@ pipeline {
 				}
 			}
 	
-		stage("Deploy on K8s")
-			{
+		stage("Deploy on K8s") {
 			agent {label 'kubectl'}
 			steps { 
 				script {
@@ -51,4 +48,3 @@ pipeline {
 			}
 		}
 	}
-
